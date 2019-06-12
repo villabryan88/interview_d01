@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 13:17:32 by bvilla            #+#    #+#             */
-/*   Updated: 2019/06/12 13:47:08 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/06/12 13:48:20 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,6 @@ void printReverseV2(struct s_node *lst) {
         printf("%s", i->word);
         free(i);
     }
+    free(stack);
     printf("\n");
 }
