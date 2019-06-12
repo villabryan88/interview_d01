@@ -6,12 +6,13 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 13:17:32 by bvilla            #+#    #+#             */
-/*   Updated: 2019/06/12 13:33:25 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/06/12 13:36:00 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 struct s_stack *stackInit(void){
     struct s_stack *new;
@@ -23,7 +24,7 @@ struct s_stack *stackInit(void){
 }
 
 void *pop(struct s_stack *stack){
-    struct s_stack *ret;
+    struct s_item *ret;
 
     ret = stack->item;
     if (stack->item)
@@ -35,7 +36,7 @@ void push(struct s_stack *stack, char *word){
     struct s_item *new;
 
     if (!(new = malloc(sizeof(struct s_item))))
-        return (NULL);
+        return ;
     new->word = word;
     new->next = stack->item;
     stack->item = new;
@@ -50,10 +51,10 @@ void printReverseV2(struct s_node *lst) {
     for(struct s_item *i = pop(stack); i; i = pop(stack))
     {
         if (!first)
-            ft_printf(" ");
+            printf(" ");
         else
             first = 0;
-        ft_printf("%s");
+        printf("%s", i->word);
     }
-    ft_printf("\n");
+    printf("\n");
 }
