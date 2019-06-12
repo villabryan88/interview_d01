@@ -6,13 +6,14 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 13:49:54 by bvilla            #+#    #+#             */
-/*   Updated: 2019/06/12 13:56:11 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/06/12 14:22:39 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 struct s_stack *stackInit(void){
     struct s_stack *new;
@@ -23,13 +24,14 @@ struct s_stack *stackInit(void){
     return (new);
 }
 
-void *pop(struct s_stack *stack){
-    struct s_item *ret;
-
-    ret = stack->item;
+int pop(struct s_stack *stack){
+    struct s_item *del;
+    int     ret;
+    del = stack->item;
+    ret = stack->item->idx;
     if (stack->item)
         stack->item = stack->item->next;
-
+    free (del);
     return (ret);
 }
 void push(struct s_stack *stack, int idx){
@@ -43,8 +45,20 @@ void push(struct s_stack *stack, int idx){
 }
 
 char *console(void){
-    char input[255];
+    struct s_stack *stack = stackInit();
+    char *input = NULL;
+    char *msg;
+    size_t size;
 
-    scanf("%s\n", &input);
-    printf("%s\n", input);
+    if (!(msg=malloc(256)))
+        return NULL;
+    bzero(msg, 256);
+
+    while (getline(&input, &size, stdin))
+    {
+        strncpy(msg, input, (int)strlen(input) - 1);
+        push(stack, (int)strlen(input) - 1);
+    }
+    free(input);
+    return (msg);
 }
