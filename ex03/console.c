@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 13:49:54 by bvilla            #+#    #+#             */
-/*   Updated: 2019/06/12 14:42:29 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/06/12 14:44:54 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,12 @@ char *console(void){
 	printf("?: ");
 	while (getline(&input, &size, stdin) > 0)
 	{
-		if (strcmp(input, "UNDO\n"))
+		if (!strcmp(input, "UNDO\n"))
 		{
 			i = pop(stack);
 			bzero(msg + i, 256 - i);
 		}
-		else if (strcmp(input, "SEND\n"))
+		else if (!strcmp(input, "SEND\n"))
 		{
 			break ;
 		}
