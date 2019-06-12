@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 13:49:54 by bvilla            #+#    #+#             */
-/*   Updated: 2019/06/12 14:48:11 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/06/12 14:53:12 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,9 @@ char *console(void){
 		printf("%s\n\n", msg);
 		printf("?: ");
 	}
+	while(stack->item)
+		pop(stack);
+	free(stack);
 	free(input);
 	return (msg);
 }
