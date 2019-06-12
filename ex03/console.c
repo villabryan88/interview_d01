@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 13:49:54 by bvilla            #+#    #+#             */
-/*   Updated: 2019/06/12 14:46:13 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/06/12 14:48:11 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,9 @@ char *console(void){
 			i += in_len;
 			if (in_len)
 				msg[i++] = ' ';
-			printf("%s\n", msg);
-			printf("?: ");
 		}
+		printf("%s\n\n", msg);
+		printf("?: ");
 	}
 	free(input);
 	return (msg);
