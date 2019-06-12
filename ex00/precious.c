@@ -6,24 +6,24 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 00:23:57 by bvilla            #+#    #+#             */
-/*   Updated: 2019/06/12 00:48:16 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/06/12 00:49:51 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
 #include "header.h"
-#include <stdio.h>
+#include <stdlib.h>
 
 void rotate(struct s_node **rotator, int turns)
 {
     if (turns > 0)
     {
-        for(int i = 0; i < turns; i++);
+        for(int i = 0; i < turns; i++)
             *rotator = (*rotator)->next;
     }
     else if (turns < 0)
     {
-          for(int i = 0; i > turns; i--);
+          for(int i = 0; i > turns; i--)
             *rotator = (*rotator)->prev;
     }
 }
@@ -43,8 +43,8 @@ char *precious(int *text, int size) {
     for(int i = 1; i < len; i++)
     {       
         nodes[i].c = CS[i];
-        nodes[i].prev = CS[i - 1];
-        nodes[i].next = CS[(i + 1) % len];
+        nodes[i].prev = nodes + i - 1;
+        nodes[i].next = nodes + ((i + 1) % len);
     }
 
     for(int i = 0; i < size; i++)
