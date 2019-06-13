@@ -1,0 +1,15 @@
+push and popping are:
+O(1) time
+o(1) space
+
+however the visualizing is
+o(n) for data that has been entered
+o(1) space
+
+tank pop without vizualising is
+o(1) time
+o(1) space
+
+tank push without visualizing is
+o(1) time on average but up to o(n) time (where n is data that has been entered thus far) because of the copying realloc does
+o(1) space (only one more item is created each turn)
