@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 19:01:10 by bvilla            #+#    #+#             */
-/*   Updated: 2019/06/13 11:55:17 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/06/13 12:00:34 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int pop(struct s_stack *stack){
     if (stack->elem){
         energy = stack->elem->energy;
         stack->elem = stack->elem->next;
+		stack->sum -= energy;
     }
     free(del);
     return (energy);
@@ -120,9 +121,12 @@ void tankPush(struct s_tank *tank, int energy){
 int tankPop(struct s_tank *tank){
 	int energy;
 
+
 	energy = pop(tank->stacks[tank->n - 1]);
 	if(tank->stacks[tank->n - 1]->sum == 0 && tank->n > 1)
 	{
+		while(tank->stacks[tank->n - 1]->elem)
+			pop(tank->stacks[tank->n - 1]);
 		free(tank->stacks[tank->n - 1]);
 		tank->stacks[tank->n - 1] = NULL;
 		tank->n--;

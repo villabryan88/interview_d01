@@ -14,6 +14,10 @@ int main(void)
 	--------------------*/
 	tankPush(tank, 10);
 	tankPush(tank, 50);
+	tankPush(tank, 930);
+	tankPush(tank, 100);
+	tankPush(tank, 10);
+	tankPop(tank);
 	return (0);
 }
 
