@@ -45,6 +45,8 @@ int main(void)
 	tankPush(tank, 10);
 	tankPop(tank);
 	tankPop(tank);
+	for (int i = 0; i <= 21; i++)
+		tankPush(tank, 100);
 	return (0);
 }
 
