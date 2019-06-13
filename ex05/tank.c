@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 19:01:10 by bvilla            #+#    #+#             */
-/*   Updated: 2019/06/12 20:29:09 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/06/13 11:46:49 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,37 +45,84 @@ void push(struct s_stack *stack, int energy){
     stack->elem = new;
 }
 
+void visualize_tank(struct s_tank *tank){
+	for(int j = 0; j < tank->n; j++)
+	{
+		if (j = 0)
+			printf("normal");
+		printf(" nitro%d", j);
+	}
+	printf("\n");
+	for(int j = 0; j < tank->n; j++)
+	{
+		if (j = 0)
+			printf("______");
+		printf(" ______");	
+	}
+	printf("\n");
+	for(int j = 0; j < tank->n; j++)
+	{
+		if (j = 0)
+			printf("|%-4d|", j);
+		printf(" |%-4d|", j);	
+	}
+	printf("\n");
+	for(int j = 0; j < tank->n; j++)
+	{
+		if (j = 0)
+			printf("|    |");
+		printf(" |    |");	
+	}
+	printf("\n");
+}
+
 struct s_tank *initTank(void){
 	struct s_tank *new;
+	struct s_stack **stacks;
 
 	if (!(new = malloc(sizeof(struct s_tank))))
 		return (NULL);
-	new->stacks = NULL;
-    new->n = 0;
+	if (!(stacks = malloc (sizeof(struct s_stack*))))
+	{
+		free(new);
+		return (NULL);
+	}
+	if (!(*stacks = stackInit()))
+	{
+		free(stacks);
+		free(new);
+		return (NULL);
+	}
+	new->stacks = stacks;
+    new->n = 1;
 	return (new);
 }
 
 void tankPush(struct s_tank *tank, int energy){
-	struct s_elem *new;
-    struct s_stack *new_stack = NULL;
+    struct s_stack *stack = tank->stacks;
 
-	if (!(new = malloc(sizeof(struct s_elem))))
-		return ;
-	new->energy = energy;
-	new->next = stack->elem;
-	stack->elem = new;
+	if (stack->sum + energy > 1000)
+	{
+		if (!(tank->stacks = realloc(tank->stacks, sizeof(struct s_stack*) * (tank->n + 1))))
+			return (NULL);
+		if(!(tank->stacks[tank->n] = stackInit()))
+			return(NULL);
+		tank->n++;
+	}
+	push(tank->stacks[tank->n - 1], energy);
+	visualize_tank(tank);
 }
 
 int tankPop(struct s_tank *tank){
-	struct s_elem *del;
-	int     ret = 0;
-	del = stack->elem;
+	int energy;
 
-	if (stack->elem)
+	energy = pop(tank->stacks[tank->n - 1]);
+	if(tank->stacks[tank->n - 1]->sum == 0 && tank->n > 1)
 	{
-		ret = stack->elem->idx;
-		stack->elem = stack->elem->next;
+		free(tank->stacks[tank->n - 1]);
+		tank->stacks[tank->n - 1] = NULL;
+		tank->n--;
 	}
-	free (del);
-	return (ret);
+	visualize_tank(tank);
+	return (energy);
 }
