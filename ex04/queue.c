@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 18:04:31 by bvilla            #+#    #+#             */
-/*   Updated: 2019/06/12 18:38:11 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/06/12 18:45:56 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void enqueue(struct s_queue *queue, char *message)
 	struct s_node *new;
 
 	if (!(new = malloc(sizeof(struct s_node))))
-        return (NULL);
+        return ;
 	new->message = message;
 	new->next = NULL;
 	if(isEmpty(queue))
