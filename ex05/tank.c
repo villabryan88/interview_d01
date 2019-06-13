@@ -6,12 +6,13 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 19:01:10 by bvilla            #+#    #+#             */
-/*   Updated: 2019/06/13 11:46:49 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/06/13 11:51:03 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 struct s_stack *stackInit(void){
 	struct s_stack *new;
@@ -48,28 +49,28 @@ void push(struct s_stack *stack, int energy){
 void visualize_tank(struct s_tank *tank){
 	for(int j = 0; j < tank->n; j++)
 	{
-		if (j = 0)
+		if (j == 0)
 			printf("normal");
 		printf(" nitro%d", j);
 	}
 	printf("\n");
 	for(int j = 0; j < tank->n; j++)
 	{
-		if (j = 0)
+		if (j == 0)
 			printf("______");
 		printf(" ______");	
 	}
 	printf("\n");
 	for(int j = 0; j < tank->n; j++)
 	{
-		if (j = 0)
+		if (j == 0)
 			printf("|%-4d|", j);
 		printf(" |%-4d|", j);	
 	}
 	printf("\n");
 	for(int j = 0; j < tank->n; j++)
 	{
-		if (j = 0)
+		if (j == 0)
 			printf("|    |");
 		printf(" |    |");	
 	}
@@ -99,14 +100,12 @@ struct s_tank *initTank(void){
 }
 
 void tankPush(struct s_tank *tank, int energy){
-    struct s_stack *stack = tank->stacks;
-
-	if (stack->sum + energy > 1000)
+	if (tank->stacks[tank->n - 1]->sum + energy > 1000)
 	{
 		if (!(tank->stacks = realloc(tank->stacks, sizeof(struct s_stack*) * (tank->n + 1))))
-			return (NULL);
+			return ;
 		if(!(tank->stacks[tank->n] = stackInit()))
-			return(NULL);
+			return ;
 		tank->n++;
 	}
 	push(tank->stacks[tank->n - 1], energy);
