@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 19:01:10 by bvilla            #+#    #+#             */
-/*   Updated: 2019/06/13 11:51:03 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/06/13 11:55:17 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void push(struct s_stack *stack, int energy){
     new->energy = energy;
     new->next = stack->elem;
     stack->elem = new;
+	stack->sum += energy;
 }
 
 void visualize_tank(struct s_tank *tank){
@@ -51,28 +52,32 @@ void visualize_tank(struct s_tank *tank){
 	{
 		if (j == 0)
 			printf("normal");
-		printf(" nitro%d", j);
+		else
+			printf(" nitro%d", j);
 	}
 	printf("\n");
 	for(int j = 0; j < tank->n; j++)
 	{
 		if (j == 0)
 			printf("______");
-		printf(" ______");	
+		else
+			printf(" ______");	
 	}
 	printf("\n");
 	for(int j = 0; j < tank->n; j++)
 	{
 		if (j == 0)
-			printf("|%-4d|", j);
-		printf(" |%-4d|", j);	
+			printf("|%-4d|", tank->stacks[j]->sum);
+		else
+			printf(" |%-4d|", tank->stacks[j]->sum);	
 	}
 	printf("\n");
 	for(int j = 0; j < tank->n; j++)
 	{
 		if (j == 0)
 			printf("|    |");
-		printf(" |    |");	
+		else
+			printf(" |    |");	
 	}
 	printf("\n");
 }
