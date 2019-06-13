@@ -14,9 +14,36 @@ int main(void)
 	--------------------*/
 	tankPush(tank, 10);
 	tankPush(tank, 50);
-	tankPush(tank, 930);
+	tankPop(tank);
+	tankPush(tank, 940);
+	for (int i = 0; i <= 10; i++)
+		tankPush(tank, 100);
 	tankPush(tank, 100);
 	tankPush(tank, 10);
+	tankPop(tank);
+	tankPush(tank, 10);
+	tankPush(tank, 50);
+	tankPop(tank);
+	for (int i = 0; i <= 10; i++)
+		tankPush(tank, 100);;
+	tankPush(tank, 100);
+	tankPush(tank, 10);
+	tankPush(tank, 10);
+	tankPush(tank, 50);
+	tankPop(tank);
+	for (int i = 0; i <= 10; i++)
+		tankPush(tank, 100);
+	tankPush(tank, 100);
+	tankPush(tank, 10);	
+	for (int i = 0; i < 45; i++)
+		tankPop(tank);
+
+	tankPush(tank, 0);
+	tankPush(tank, 0);
+	tankPush(tank, 10);
+	tankPop(tank);
+	tankPush(tank, 10);
+	tankPop(tank);
 	tankPop(tank);
 	return (0);
 }

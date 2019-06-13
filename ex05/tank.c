@@ -6,7 +6,7 @@
 /*   By: bvilla <bvilla@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 19:01:10 by bvilla            #+#    #+#             */
-/*   Updated: 2019/06/13 12:00:34 by bvilla           ###   ########.fr       */
+/*   Updated: 2019/06/13 12:25:03 by bvilla           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,35 +52,26 @@ void visualize_tank(struct s_tank *tank){
 	for(int j = 0; j < tank->n; j++)
 	{
 		if (j == 0)
-			printf("normal");
+			printf(" normal");
 		else
 			printf(" nitro%d", j);
 	}
 	printf("\n");
 	for(int j = 0; j < tank->n; j++)
 	{
-		if (j == 0)
-			printf("______");
-		else
-			printf(" ______");	
+		printf(" ______");	
 	}
 	printf("\n");
 	for(int j = 0; j < tank->n; j++)
 	{
-		if (j == 0)
-			printf("|%-4d|", tank->stacks[j]->sum);
-		else
-			printf(" |%-4d|", tank->stacks[j]->sum);	
+		printf(" |%-4d|", tank->stacks[j]->sum);	
 	}
 	printf("\n");
 	for(int j = 0; j < tank->n; j++)
 	{
-		if (j == 0)
-			printf("|    |");
-		else
-			printf(" |    |");	
+		printf(" |    |");	
 	}
-	printf("\n");
+	printf("\n\n");
 }
 
 struct s_tank *initTank(void){
@@ -106,6 +97,8 @@ struct s_tank *initTank(void){
 }
 
 void tankPush(struct s_tank *tank, int energy){
+	if (energy < 10 || energy > 100)
+		return ;
 	if (tank->stacks[tank->n - 1]->sum + energy > 1000)
 	{
 		if (!(tank->stacks = realloc(tank->stacks, sizeof(struct s_stack*) * (tank->n + 1))))
@@ -115,22 +108,21 @@ void tankPush(struct s_tank *tank, int energy){
 		tank->n++;
 	}
 	push(tank->stacks[tank->n - 1], energy);
+	printf("push(%d):\n\n", energy);
 	visualize_tank(tank);
 }
 
 int tankPop(struct s_tank *tank){
-	int energy;
-
-
+	int energy ;
 	energy = pop(tank->stacks[tank->n - 1]);
+
 	if(tank->stacks[tank->n - 1]->sum == 0 && tank->n > 1)
 	{
-		while(tank->stacks[tank->n - 1]->elem)
-			pop(tank->stacks[tank->n - 1]);
 		free(tank->stacks[tank->n - 1]);
 		tank->stacks[tank->n - 1] = NULL;
 		tank->n--;
 	}
+	printf("pop():\n\n");
 	visualize_tank(tank);
 	return (energy);
 }
